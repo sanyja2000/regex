@@ -1,0 +1,49 @@
+<html>
+<head>
+<meta charset="utf-8">
+<title>Reguláris kifejezések</title>
+</head>
+<body>
+Reguláris kifejezés:<input type="entry" id="reg" value="\b\w+\b"><button onclick="checkText()">Teszt</button><span style="float:right">Globális? <input type="checkbox" id="global"></span>
+<br>Teszt szöveg:<br>
+<textarea id="test_text" style="width:90%;height:40%">
+Welcome to RegExr v2.1 by gskinner.com, proudly hosted by Media Temple!
+
+Edit the Expression & Text to see matches. Roll over matches or the expression for details. Undo mistakes with ctrl-z. Save Favorites & Share expressions with friends or the Community. Explore your results with Tools. A full Reference & Help is available in the Library, or watch the video Tutorial.
+
+Sample text for testing:
+abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ
+0123456789 _+-.,!@#$%^&*();\/|<>"'
+12345 -98.7 3.141 .6180 9,000 +42
+555.123.4567	+1-(800)-555-2468
+foo@demo.net	bar.ba@test.co.uk
+www.demo.com	http://foo.co.uk/
+http://regexr.com/foo.html?q=bar
+https://mediatemple.net
+</textarea>
+<br>
+Egyezés
+<div id="result" style="width:90%;min-height:10%;border:1px solid">
+</div>
+<script>
+var reg = document.getElementById("reg");
+var global = document.getElementById("global");
+var textarea = document.getElementById("test_text");
+var result = document.getElementById("result");
+function checkText(){
+	var s = textarea.value;
+	var isGlobal = global.checked;
+	console.log(isGlobal);
+	var r = new RegExp(reg.value,isGlobal ? "g" : "");
+	var res = s.match(r);
+	console.log(r+" found: "+res);
+	result.innerHTML = "";
+	if(res){
+	for(var i = 0; i < res.length; i++){
+		result.innerHTML += res[i]+"<br>";
+	}}
+	
+}
+</script>
+</body>
+</html>
